@@ -2,11 +2,9 @@
 
 def remove_char_at(str, n):
     i = 0
+    newStr = ""
     while i < len(str):
-        if i == n:
-            i = i + 1
-            continue
-        else:
-            print("{}".format(str[i]), end='')
-            i = i + 1
-    print()
+        if i != n:
+            newStr += str[i]
+        i += 1
+    return newStr
