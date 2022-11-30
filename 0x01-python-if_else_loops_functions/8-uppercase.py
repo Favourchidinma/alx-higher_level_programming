@@ -1,8 +1,13 @@
 #!/usr/bin/python3
 
 def uppercase(str):
-    for letter in str:
-        if ord(letter) >= ord('a') and ord(letter) <= ord('z'):
-            print("{}".format(chr(ord(letter) - 32)), end='')
+    n = len(str) - 1
+    for let in str:
+        asc = ord(let)
+        if asc >= ord('a') and asc <= ord('z'):
+            print("{}{}".format(chr(asc - 32), '' if n != 0 else '\n'), end='')
         else:
-            print("{}".format(letter), end='')
+            print("{}{}".format(let, '' if n != 0 else '\n'), end='')
+        n = n - 1
+
+uppercase('Holberton')
