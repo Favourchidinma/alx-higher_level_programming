@@ -6,4 +6,3 @@ def uppercase(str):
             print("{}".format(chr(ord(letter) - 32)), end='')
         else:
             print("{}".format(letter), end='')
-uppercase('zello')
