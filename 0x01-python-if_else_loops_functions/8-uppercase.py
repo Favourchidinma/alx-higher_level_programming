@@ -9,5 +9,3 @@ def uppercase(str):
         else:
             print("{}{}".format(let, '' if n != 0 else '\n'), end='')
         n = n - 1
-
-uppercase('Holberton')
