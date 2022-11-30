@@ -5,4 +5,3 @@ def islower(c):
         if i == ord(c):
             return True
     return False
-
