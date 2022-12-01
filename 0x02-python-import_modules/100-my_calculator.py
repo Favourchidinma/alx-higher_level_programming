@@ -11,7 +11,8 @@ if __name__ == "__main__":
 
     operator = sys.argv[2]
     if operator not in ('+', '-', '*', '/'):
-        sys.stderr.write("Unknown operator. Available operators: +, -, * and /")
+        sys.stderr.write("Unknown operator. Available operators: "
+                         "+, -, * and /")
         sys.exit(1)
 
     a = int(sys.argv[1])
