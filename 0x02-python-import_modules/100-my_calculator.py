@@ -29,4 +29,3 @@ if __name__ == "__main__":
         print(f"{a} {operator} {b} = {calc.mul(a, b)}")
     elif operator == '/':
         print(f"{a} {operator} {b} = {calc.div(a, b)}")
-
