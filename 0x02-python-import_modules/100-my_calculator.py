@@ -8,9 +8,6 @@ if __name__ == "__main__":
     if ac != 3:
         sys.stderr.write("Usage: ./100-my_calculator.py <a> <operator> <b>\n")
         sys.exit(1)
-    if not sys.argv[1].isdigit() or not sys.argv[3].isdigit():
-        sys.stderr.write("Usage: ./100-my_calculator.py <a> <operator> <b>\n")
-        sys.exit(1)
 
     operator = sys.argv[2]
     if operator not in ('+', '-', '*', '/'):
