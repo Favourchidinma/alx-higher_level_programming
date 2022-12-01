@@ -15,14 +15,15 @@ if __name__ == "__main__":
                          "+, -, * and /")
         sys.exit(1)
 
-    a = int(sys.argv[1])
-    b = int(sys.argv[3])
+    a = float(sys.argv[1]) if '.' in sys.argv[1] else int(sys.argv[1])
+    b = float(sys.argv[3]) if '.' in sys.argv[3] else int(sys.argv[3])
+
     if operator == '+':
-        print("{:d} {:s} {:d} = {:d}".format(a, operator, b, calc.add(a, b)))
+        print(f"{a} {operator} {b} = {calc.add(a, b)}")
     elif operator == '-':
-        print("{:d} {:s} {:d} = {:d}".format(a, operator, b, calc.sub(a, b)))
+        print(f"{a} {operator} {b} = {calc.sub(a, b)}")
     elif operator == '*':
-        print("{:d} {:s} {:d} = {:d}".format(a, operator, b, calc.mul(a, b)))
+        print(f"{a} {operator} {b} = {calc.mul(a, b)}")
     elif operator == '/':
-        print("{:d} {:s} {:d} = {:d}".format(a, operator, b, calc.div(a, b)))
+        print(f"{a} {operator} {b} = {calc.div(a, b)}")
     sys.exit(0)
