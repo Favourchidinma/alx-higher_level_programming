@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-import add_0
+from add_0 import add as sum
 
 a = 1
 b = 2
-c = add_0.add(a, b)
-print(f"{a:d} + {b:d} = {c:d}")
+c = sum(a, b)
+print("{:d} + {:d} = {:d}".format(a, b, c))
