@@ -6,13 +6,16 @@ if __name__ == "__main__":
 
     ac = len(sys.argv) - 1
     if ac != 3:
-        sys.stderr.write("Usage: ./100-my_calculator.py <a> <operator> <b>")
+        sys.stderr.write("Usage: ./100-my_calculator.py <a> <operator> <b>\n")
+        sys.exit(1)
+    if not sys.argv[1].isdigit() or not sys.argv[3].isdigit():
+        sys.stderr.write("Usage: ./100-my_calculator.py <a> <operator> <b>\n")
         sys.exit(1)
 
     operator = sys.argv[2]
     if operator not in ('+', '-', '*', '/'):
         sys.stderr.write("Unknown operator. Available operators: "
-                         "+, -, * and /")
+                         "+, -, * and /\n")
         sys.exit(1)
 
     a = float(sys.argv[1]) if '.' in sys.argv[1] else int(sys.argv[1])
