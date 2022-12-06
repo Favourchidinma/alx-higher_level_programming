@@ -1,0 +1,74 @@
+#include "lists.h"
+#include <stdio.h>
+
+/**
+ * is_palindrome - a function in C that checks if a singly linked list is
+ *                 a palindrome.
+ * @head: the address of a pointer to the first node of the list
+ * Return: returns 1 if linked list is palindrome else 0
+ */
+int is_palindrome(listint_t **head)
+{
+	listint_t *prev = NULL, *nxt = NULL;
+	listint_t *temp = NULL, *new = NULL, *head2 = NULL;
+
+	if (head == NULL || *head == NULL || (*head)->next == NULL)
+		return (1);
+
+	/* check if there is cycle */
+	
+
+	/* create duplicate list */
+	temp = *head;
+	while (temp != NULL)
+	{
+		new = malloc(sizeof(listint_t));
+		if (!new)
+		{
+			free_listint(head2);
+			exit(1);
+		}
+		new->n = temp->n;
+		new->next = temp->next;
+		temp = temp->next;
+		if (head2 == NULL)
+			head2 = new;
+	}
+	new->next = NULL;
+	printf("----> Before reverse duplicate (*head) -------------\n");
+	print_listint(*head);
+	
+	/* reverse duplicate */
+	while (head2 != NULL)
+	{
+		nxt = head2->next;
+		head2->next = prev;
+		prev = head2;
+		head2 = nxt;
+	}
+	head2 = prev;
+
+	printf("----> After reverse duplicate (*head) -------------\n");
+	print_listint(*head);
+	printf("----> 1. -------------\n");
+	print_listint(*head);
+	
+	/* compare the two lists */
+	temp = *head;
+	printf("----> 1. -------------\n");
+	print_listint(*head);
+	
+	while (1)
+	{
+		printf("%d  -  %d\n", temp->n, head2->n);
+		if (temp->n != head2->n)
+		{
+			printf("%d     %d\n", temp->n, head2->n);
+			return (0);
+		}
+		else if (temp == NULL && head2 == NULL)
+		 	return (1);
+		head2 = head2->next;
+		temp = temp->next;
+	}
+}
