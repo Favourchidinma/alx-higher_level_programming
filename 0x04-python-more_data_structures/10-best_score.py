@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 def best_score(a_dictionary):
-    if a_dictionary is None or len(a_dictionary) == 0:
-        return a_dictionary
+    if len(a_dictionary) == 0:
+        return None
 
     val_list = list(a_dictionary.values())
     val_list.sort(reverse=True)
