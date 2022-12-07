@@ -23,12 +23,15 @@ def roman_to_int(roman_string):
     stat = None
     result = 0
 
-    for i in range(len(roman_string)):
+    i = 0;
+    while i < (len(roman_string)):
         if (stat := get_value(roman_string[i:i+2])) != -1:
             result = result + stat
+            i = i + 2
             continue
         if (stat := get_value(roman_string[i])) != -1:
             result = result + stat
+            i = i + 1
             continue
         else:
             print("No value for {}".format(roman_string[i]))
