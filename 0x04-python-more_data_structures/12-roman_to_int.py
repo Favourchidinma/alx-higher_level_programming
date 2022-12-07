@@ -17,7 +17,9 @@ def get_value(str):
 
 
 def roman_to_int(roman_string):
-    if not roman_string.isalpha() or roman_string is None:
+    if roman_string is None:
+        return 0
+    if not roman_string.isalpha():
         return 0
 
     stat = None
