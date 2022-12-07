@@ -34,5 +34,5 @@ def roman_to_int(roman_string):
             i = i + 1
             continue
         else:
-            return 0
+            return None
     return result
