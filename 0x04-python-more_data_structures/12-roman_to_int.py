@@ -34,6 +34,5 @@ def roman_to_int(roman_string):
             i = i + 1
             continue
         else:
-            print("No value for {}".format(roman_string[i]))
-            quit()
+            return None
     return result
