@@ -17,3 +17,7 @@ print("{} = {}".format(roman_number, roman_to_int(roman_number)))
 
 roman_number = "DCCVII"
 print("{} = {}".format(roman_number, roman_to_int(roman_number)))
+
+while True:
+    roman_number = input("Enter a Roman Figure: ")
+    print("{} = {}".format(roman_number, roman_to_int(roman_number)))
