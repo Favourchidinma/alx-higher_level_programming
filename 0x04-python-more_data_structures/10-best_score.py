@@ -2,7 +2,7 @@
 
 def best_score(a_dictionary):
     if a_dictionary is None:
-        return None
+        return a_dictionary
 
     val_list = list(a_dictionary.values())
     val_list.sort(reverse=True)
