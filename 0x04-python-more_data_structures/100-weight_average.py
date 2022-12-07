@@ -6,8 +6,6 @@ def weight_average(my_list=[]):
 
     lst1 = [k * v for k, v in my_list]
     lst2 = [v for k, v in my_list]
-    print(lst1)
-    print(lst2)
 
     sum_lst1 = 0
     sum_lst2 = 0
