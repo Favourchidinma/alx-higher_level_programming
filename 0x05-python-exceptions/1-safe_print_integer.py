@@ -6,4 +6,4 @@ def safe_print_integer(value):
     except Exception:
         ret = False
 
-        return ret
+    return ret
