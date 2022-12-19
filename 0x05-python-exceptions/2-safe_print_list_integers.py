@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 def safe_print_list_integers(my_list=[], x=0):
+#    if x > 0:
     for i in range(x):
         try:
             print("{:d}".format(my_list[i]), end='')
@@ -9,4 +10,10 @@ def safe_print_list_integers(my_list=[], x=0):
         except TypeError:
             continue
     print()
-    return i
+    try:
+        return i
+    except UnboundLocalError:
+        return 0
+    #else:
+    #print()
+    #return 0
