@@ -5,7 +5,7 @@ safe_print_list_integers = \
 
 my_list = [1, 2, 3, 4, 5]
 
-nb_print = safe_print_list_integers(my_list, -3)
+nb_print = safe_print_list_integers(None, 2)
 print("nb_print: {:d}".format(nb_print))
 
 my_list = [1, 2, None, 3, "School", 4, 5]
