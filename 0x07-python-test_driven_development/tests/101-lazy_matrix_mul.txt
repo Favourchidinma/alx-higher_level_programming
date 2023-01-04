@@ -9,7 +9,7 @@ Import the function:
 
     >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
 
-Now test it:
+Now test it :
 
     >>> print(lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
     [[ 7 10]
