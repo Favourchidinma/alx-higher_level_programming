@@ -34,24 +34,24 @@ int is_palindrome(listint_t **head)
 	if (*head == NULL || (*head)->next == NULL)
 		return (1);
 
-	/* find the middle of the linked list */
-	/* for every one move 'slow' pointer goes, 'fast' makes two moves */
-	while (fast != NULL && fast->next != NULL)
+	while (1)
 	{
 		fast = fast->next->next;
+		if (!fast)
+		{
+			dup = slow->next;
+			break;
+		}
+		if (!fast->next)
+		{
+			dup = slow->next->next;
+			break;
+		}
 		slow = slow->next;
 	}
-	dup = slow; /**
-		     * at this point, (fast == NULL or fast->next == NULL)
-		     * 'slow' is definately the at middle item (as in
-		     * the case of an odd list) or the item just after it
-		     * (in case of even list)
-		     */
 
-	/* reverse the items from the middle to the end */
 	rev_list(&dup);
 
-	/* compare from (1st item to middle) vs (last item to middle) */
 	while (dup && temp)
 	{
 		if (temp->n == dup->n)
