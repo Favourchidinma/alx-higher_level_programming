@@ -2,7 +2,3 @@
 
 def lookup(obj):
     return dir(obj)
-
-
-if __name__ == "__main__":
-    print(lookup(int))
