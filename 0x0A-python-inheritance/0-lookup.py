@@ -2,6 +2,3 @@
 
 def lookup(obj):
     return obj.__dict__
-
-
-print(lookup(int))
