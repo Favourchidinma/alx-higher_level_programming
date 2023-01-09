@@ -27,3 +27,6 @@ Checker tests
 >>> my_list = MyList([3, 4, 8])
 >>> my_list
 [3, 4, 8]
+>>> my_list = MyList("Hello")
+>>> my_list
+['H', 'e', 'l', 'l', 'o']
