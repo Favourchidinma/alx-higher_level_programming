@@ -1,4 +1,8 @@
 #!/usr/bin/python3
 
 def lookup(obj):
-    return obj.__dict__
+    return dir(obj)
+
+
+if __name__ == "__main__":
+    print(lookup(int))
