@@ -6,15 +6,10 @@
 def add_attribute(obj, attr, val):
     """A function that trys to add attributes to an object.
     """
-    if getattr(obj, attr, "My default") != "My default":
+
+    if not hasattr(obj, '__slots__') and not hasattr(obj, '__dict__'):
         raise TypeError("can't add new attribute")
-    else:
-        setattr(obj, attr, val)
+    if hasattr(obj, '__slots__') and not hasattr(obj, attr):
+        raise TypeError("can't add new attribute")
 
-
-#    if not hasattr(an_obj, '__slots__') and not hasattr(an_obj, '__dict__'):
-#        raise TypeError("can't add new attribute")
-#    if hasattr(an_obj, '__slots__') and not hasattr(an_obj, an_attr):
-#        raise TypeError("can't add new attribute")
-
-#    setattr(an_obj, an_attr, a_value)
+    setattr(obj, attr, val)
