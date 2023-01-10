@@ -19,9 +19,13 @@ class BaseGeometry:
           the message <name> must be greater than 0
     """
     def area(self):
+        """raises an exception
+        """
         raise Exception("area() is not implemented")
 
     def integer_validator(self, name, value):
+        """Validates ``value``
+        """
         if type(value) is not int:
             raise TypeError("{} must be an integer".format(name))
         if value <= 0:
