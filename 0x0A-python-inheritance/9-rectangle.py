@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""A module that contains a function.
+"""A module that contains a class.
 """
 BaseGeometry = __import__("7-base_geometry").BaseGeometry
 
