@@ -4,6 +4,6 @@
 
 
 class BaseGeometry:
-    """an empty class BaseGeometry.
+    """An empty class BaseGeometry.
     """
     pass
