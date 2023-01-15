@@ -93,29 +93,51 @@ class Rectangle(Base):
                                                        self.__width,
                                                        self.__height)
 
-    def update(self, *args):
-        """A method that assigns new values to the instance attributes."""
+    def update(self, *args, **kwargs):
+        """A method that assigns new values to the instance attributes.
+        #-> Task 8: create `def(self, *args)`
+        #-> Task 9: update to `def(self, *args,  **kwargs)`.
+        """
+        if args and len(args) != 0:  # Case 1: args is not empty
+            # handle args
+            if len(args) == 1:  # only one argument passed
+                self.id = args[0]
+            elif len(args) == 2:
+                self.id = args[0]
+                self.__width = args[1]
+            elif len(args) == 3:
+                self.id = args[0]
+                self.__width = args[1]
+                self.__height = args[2]
+            elif len(args) == 4:
+                self.id = args[0]
+                self.__width = args[1]
+                self.__height = args[2]
+                self.__x = args[3]
+            elif len(args) == 5:
+                self.id = args[0]
+                self.__width = args[1]
+                self.__height = args[2]
+                self.__x = args[3]
+                self.__y = args[4]
+            elif len(args) > 5:
+                pass  # TODO: raise something/do something
 
-        if len(args) == 1:  # only one argument passed
-            self.id = args[0]
-        if len(args) == 2:
-            self.id = args[0]
-            self.__width = args[1]            
-        if len(args) == 3:
-            self.id  = args[0]
-            self.__width = args[1]
-            self.__height = args[2]
-        if len(args) == 4:
-            self.id  = args[0]
-            self.__width = args[1]
-            self.__height = args[2]
-            self.__x = args[3]
-        if len(args) == 5:
-            self.id  = args[0]
-            self.__width = args[1]
-            self.__height = args[2]
-            self.__x = args[3]
-            self.__y = args[4]
+        elif kwargs and len(kwargs) != 0:   # Case 2: args is empty
+            lst = ['id', 'width', 'height', 'x', 'y']
+            for item in kwargs:
+                if item not in lst:
+                    raise KeyError("TODO: Not implemented yet")
+            if 'id' in kwargs:
+                self.id = kwargs['id']
+            if 'width' in kwargs:
+                self.__width = kwargs['width']
+            if 'height' in kwargs:
+                self.__height = kwargs['height']
+            if 'x' in kwargs:
+                self.__x = kwargs['x']
+            if 'y' in kwargs:
+                self.__y = kwargs['y']
+
         else:
-            pass  # raise something/do something
-    
+            pass  # TODO: implement something later
