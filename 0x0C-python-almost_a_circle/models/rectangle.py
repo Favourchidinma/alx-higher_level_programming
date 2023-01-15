@@ -140,4 +140,4 @@ class Rectangle(Base):
                 self.__y = kwargs['y']
 
         else:
-            pass  # TODO: implement something later
+            pass  # TODO: Implement something later
