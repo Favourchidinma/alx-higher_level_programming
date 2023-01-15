@@ -141,3 +141,10 @@ class Rectangle(Base):
 
         else:
             pass  # TODO: Implement something later
+
+    def to_dictionary(self):
+        """A method that returns a dictionary containing the attributes of a
+        rectangle object and their respective values.
+        """
+        return {'id': self.id, 'width': self.__width,
+                'height': self.__height, 'x': self.__x, 'y': self.__y}

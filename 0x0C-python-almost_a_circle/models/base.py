@@ -2,6 +2,7 @@
 """ A module `base` that contains a class `Base` to be used as the base class
 for future implementation of other classes.
 """
+import json
 
 
 class Base:
@@ -20,3 +21,32 @@ class Base:
         else:
             type(self).__nb_objects += 1
             self.id = type(self).__nb_objects
+
+    @staticmethod
+    def to_json_string(list_dictionaries):  # Task 15
+        """A method that returns the JSON string representation of
+        ``list_dictionaries``.
+        """
+        if list_dictionaries is None:
+            return json.dumps([])
+        return json.dumps(list_dictionaries)
+
+    @classmethod
+    def save_to_file(cls, list_objs):   # Task 16
+        """A method that writes the JSON string representation of `list_objs`
+        to a file.
+        """
+        new_list = []
+        for item in list_objs:
+            if isinstance(item, Base):
+                new_list.append(item.to_dictionary())
+            else:
+                pass   # raise something
+
+        filename = str(cls.__name__) + '.json'
+
+        temp = cls.to_json_string(new_list)
+
+        with open(filename, 'w', encoding='utf-8') as fp:
+            fp.write(temp)
+        
