@@ -49,4 +49,17 @@ class Base:
 
         with open(filename, 'w', encoding='utf-8') as fp:
             fp.write(temp)
-        
+
+    @staticmethod
+    def from_json_string(json_string):
+        """A method that returns the list of the JSON string representation
+        ``json_string``.
+
+        Args:
+            json_string(str): is a string representing a list of dictionaries
+        """
+        if json_string is None or len(json_string) == 0:
+            return json.loads('[]')
+        return json.loads(json_string)
+
+    def create(cls, **dictionary):
