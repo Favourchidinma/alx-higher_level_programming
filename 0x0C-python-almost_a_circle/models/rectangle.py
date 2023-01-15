@@ -77,7 +77,7 @@ class Rectangle(Base):
         """
         return self.__width * self.__height
 
-    def display(self):  # Task 5: create. Task 7: Update (implement x & y)
+    def display(self):  # Task 5: create Task 7: Update (implement x & y)
         """
         A method that prints in stdout the rectangle object with `#`.
         """
@@ -127,7 +127,7 @@ class Rectangle(Base):
             lst = ['id', 'width', 'height', 'x', 'y']
             for item in kwargs:
                 if item not in lst:
-                    raise KeyError("TODO: Not implemented yet")
+                    raise KeyError("{} not in found".format(item))
             if 'id' in kwargs:
                 self.id = kwargs['id']
             if 'width' in kwargs:

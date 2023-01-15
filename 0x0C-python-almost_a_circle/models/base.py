@@ -54,6 +54,7 @@ class Base:
     def from_json_string(json_string):
         """A method that returns the list of the JSON string representation
         ``json_string``.
+        It converts json string to python object.
 
         Args:
             json_string(str): is a string representing a list of dictionaries
@@ -62,4 +63,31 @@ class Base:
             return json.loads('[]')
         return json.loads(json_string)
 
+    @classmethod
     def create(cls, **dictionary):
+        """A method that returns an instance with all attributes already set.
+        """
+        temp_rect = cls(1, 1)  # dummy values
+        temp_rect.update(**dictionary)
+
+        return temp_rect
+
+    @classmethod
+    def load_from_file(cls):
+        """A method that returns a list of instances.
+        """
+        filename = cls.__name__ + '.json'
+
+        try:
+            with open(filename, 'r', encoding='utf-8') as fp:
+                temp = fp.read()
+        except FileNotFoundError:
+            return []
+
+        temp_list = cls.from_json_string(temp)
+
+        new_list = []
+        for item in temp_list:
+            new_list.append(cls.create(**item))
+
+        return new_list
