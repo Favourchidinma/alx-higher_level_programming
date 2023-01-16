@@ -14,48 +14,6 @@ class Square(Rectangle):
         return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y,
                                                  self.width)
 
-    def update(self, *args, **kwargs):
-        """A method that assigns values to object attributes.
-        """
-        if args and len(args) != 0:
-            if len(args) == 1:  # only one argument passed
-                self.id = args[0]
-            elif len(args) == 2:
-                self.id = args[0]
-                self.width = args[1]
-                self.height = args[1]
-            elif len(args) == 3:
-                self.id = args[0]
-                self.width = args[1]
-                self.height = args[1]
-                self.x = args[2]
-            elif len(args) == 4:
-                self.id = args[0]
-                self.width = args[1]
-                self.height = args[1]
-                self.x = args[2]
-                self.y = args[3]
-            elif len(args) > 4:
-                pass  # TODO: raise something/do something
-
-        elif kwargs and len(kwargs) != 0:
-            lst = ['id', 'size', 'x', 'y']
-            for item in kwargs:
-                if item not in lst:
-                    raise KeyError("TODO: Not implemented yet")
-            if 'id' in kwargs:
-                self.id = kwargs['id']
-            if 'size' in kwargs:
-                self.width = kwargs['size']
-                self.height = kwargs['size']
-            if 'x' in kwargs:
-                self.x = kwargs['x']
-            if 'y' in kwargs:
-                self.y = kwargs['y']
-
-        else:
-            pass  # TODO: Implement later
-
     def to_dictionary(self):
         """A method that returns a dictionary containing the attributes of a
         square object and their respective values.
