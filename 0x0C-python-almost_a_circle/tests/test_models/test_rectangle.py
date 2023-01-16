@@ -56,32 +56,32 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaises(TypeError):
             r5.height = (321, 13)
         with self.assertRaises(TypeError):
-            r5.x = {'1':2, '2':3, '3':4}
+            r5.x = {'1': 2, '2': 3, '3': 4}
         with self.assertRaises(TypeError):
             r5.y = 13212.4
 
         # --------------------> ValueErrors <-------------------
-        with self.assertRaises(ValueError): # width must be > 0
+        with self.assertRaises(ValueError):  # width must be > 0
             r6 = Rectangle(0, 1)
-        with self.assertRaises(ValueError): # height must be > 0
+        with self.assertRaises(ValueError):  # height must be > 0
             r6 = Rectangle(5, 0)
-        with self.assertRaises(ValueError): # x must be >= 0
+        with self.assertRaises(ValueError):  # x must be >= 0
             r6 = Rectangle(5, 1, -1)
-        with self.assertRaises(ValueError): # y must be >= 0
+        with self.assertRaises(ValueError):  # y must be >= 0
             r6 = Rectangle(5, 1, 0, -1)
         # ckeck others
         r6 = Rectangle(1, 3)
-        with self.assertRaises(ValueError): # width must be > 0
+        with self.assertRaises(ValueError):  # width must be > 0
             r6.width = 0
-        with self.assertRaises(ValueError): # width must be > 0
+        with self.assertRaises(ValueError):  # width must be > 0
             r6.width = -1
-        with self.assertRaises(ValueError): # height must be > 0
+        with self.assertRaises(ValueError):  # height must be > 0
             r6.height = 0
-        with self.assertRaises(ValueError): # height must be > 0
+        with self.assertRaises(ValueError):  # height must be > 0
             r6.height = -132
-        with self.assertRaises(ValueError): # x must be >= 0
+        with self.assertRaises(ValueError):  # x must be >= 0
             r6.x = -1
-        with self.assertRaises(ValueError): # y must be >= 0
+        with self.assertRaises(ValueError):  # y must be >= 0
             r6.y = -123
 
     def test_area(self):         # Task 4:
