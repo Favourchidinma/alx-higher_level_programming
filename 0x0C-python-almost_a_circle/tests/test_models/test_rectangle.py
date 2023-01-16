@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""Test base module."""
+"""Test rectangle module."""
 import unittest
 from models.rectangle import Rectangle
 
 
 class TestRectangle(unittest.TestCase):
-    """Test Base class.
+    """Test rectangle class.
     """
     def test_create_rectangle(self):   # Task 2: create class Rectangle
         r1 = Rectangle(10, 2)
