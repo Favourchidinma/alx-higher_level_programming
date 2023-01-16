@@ -120,7 +120,7 @@ class Rectangle(Base):
                 self.__height = args[2]
                 self.__x = args[3]
                 self.__y = args[4]
-            elif len(args) > 5: # redundant
+            elif len(args) > 5:  # redundant
                 pass
 
         elif kwargs and len(kwargs) != 0:   # Case 2: args is empty

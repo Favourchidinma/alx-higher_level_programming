@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """A module `base` that contains a class `Base` to be used as the base class
-for future implementation of other classes. 
+for future implementation of other classes.
 """
 import json
 
