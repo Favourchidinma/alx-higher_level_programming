@@ -88,14 +88,9 @@ class Rectangle(Base):
 
     def __str__(self):  # Task 6:
         """return formated string."""
-        if type(self).__name__ == "Rectangle":
-            args = (type(self).__name__, self.id, self.__x, self.__y,
-                    self.__width, self.__height)
-            return "[{}] ({}) {}/{} - {}/{}".format(*args)
-        elif type(self).__name__ == "Square":
-            args = (type(self).__name__, self.id, self.__x, self.__y,
-                    self.__width)
-            return "[{}] ({}) {}/{} - {}".format(*args)
+        args = (type(self).__name__, self.id, self.__x, self.__y,
+                self.__width, self.__height)
+        return "[{}] ({}) {}/{} - {}/{}".format(*args)
 
     def update(self, *args, **kwargs):
         """A method that assigns new values to the instance attributes.
