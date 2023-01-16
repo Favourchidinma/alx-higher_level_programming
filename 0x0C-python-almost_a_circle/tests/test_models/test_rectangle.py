@@ -1,184 +1,248 @@
 #!/usr/bin/python3
-"""Test rectangle module."""
+"""Unittest rectangle
+Test cases for the Rectangle class.
+Each test has the number of the task,
+and the number of the test for that task
+(i.e 'test_17_0' for the first test of task 17)
+"""
+
 import unittest
+import io
+import contextlib
+from models.base import Base
 from models.rectangle import Rectangle
+from models.square import Square
 
 
 class TestRectangle(unittest.TestCase):
-    """Test rectangle class.
-    """
-    def test_create_rectangle(self):   # Task 2: create class Rectangle
+    """Test cases for the Rectangle class."""
+
+    def setUp(self):
+        Base._Base__nb_objects = 0
+
+    def test_2_0(self):
+        """Test Rectangle class: check for id."""
+
+        r0 = Rectangle(1, 2)
+        self.assertEqual(r0.id, 1)
+        r1 = Rectangle(2, 3)
+        self.assertEqual(r1.id, 2)
+        r2 = Rectangle(3, 4)
+        self.assertEqual(r2.id, 3)
+        r3 = Rectangle(10, 2, 0, 0, 12)
+        self.assertEqual(r3.id, 12)
+        r4 = Rectangle(10, 2, 4, 5, 34)
+        self.assertEqual(r4.id, 34)
+        r5 = Rectangle(10, 2, 4, 5, -5)
+        self.assertEqual(r5.id, -5)
+        r6 = Rectangle(10, 2, 4, 5, 9)
+        self.assertEqual(r6.id, 9)
+
+    def test_2_1(self):
+        """Test Rectangle class: check for attributes values."""
+
         r1 = Rectangle(10, 2)
         self.assertEqual(r1.width, 10)
-        self.assertEqual(r1.id, 6)   # previous id stopped at 5
+        self.assertEqual(r1.height, 2)
+        self.assertEqual(r1.x, 0)
+        self.assertEqual(r1.y, 0)
+        r2 = Rectangle(10, 2, 4, 5, 24)
+        self.assertEqual(r2.width, 10)
+        self.assertEqual(r2.height, 2)
+        self.assertEqual(r2.x, 4)
+        self.assertEqual(r2.y, 5)
 
-        r2 = Rectangle(2, 10)
-        self.assertEqual(r2.width, 2)
-        self.assertEqual(r2.height, 10)
-        self.assertEqual(r2.id, 7)
+    def test_2_2(self):
+        """Test class Rectangle: check for missing arguments."""
 
-        r3 = Rectangle(10, 2, 0, 0, 12)
-        self.assertEqual(r3.width, 10)
-        self.assertEqual(r3.height, 2)
-        self.assertEqual(r3.x, 0)
-        self.assertEqual(r3.y, 0)
-        self.assertEqual(r3.id, 12)
+        with self.assertRaises(TypeError) as x:
+            r0 = Rectangle(5)
+        self.assertEqual(
+            "__init__() missing 1 required positional argument: 'height'", str(
+                x.exception))
+        s = ("__init__() missing 2 required positional" +
+             " arguments: 'width' and 'height'")
+        with self.assertRaises(TypeError) as x:
+            r1 = Rectangle()
+        self.assertEqual(s, str(x.exception))
 
-        # When less than 2 args are supplied
-        with self.assertRaises(TypeError):
-            r4 = Rectangle()
-        with self.assertRaises(TypeError):
-            r4 = Rectangle(10)
+    def test_2_3(self):
+        """Test class Rectangle: check for inheritance."""
 
-        # When more than 5 args are supplied
-        with self.assertRaises(TypeError):
-            r4 = Rectangle(10, 2, 0, 0, 100, 1)
+        r1 = Rectangle(9, 3)
+        self.assertTrue(isinstance(r1, Base))
+        self.assertTrue(issubclass(Rectangle, Base))
+        self.assertFalse(isinstance(Rectangle, Base))
 
-    def test_validate_rectangle(self):
-        # Task 3: update class Rectangle (implement validation)
+    def test_3_0(self):
+        """Test Rectangle class: check for wrong attributes."""
 
-        # Test `width`, `height`, `x` and `y` validators respectively.
-        # --------------------> TypeErrors <-------------------
-        # check string assignment
-        with self.assertRaises(TypeError):
-            r5 = Rectangle('a string', 2, 0)
-        with self.assertRaises(TypeError):
-            r5 = Rectangle(1, 'another string', 1)
-        with self.assertRaises(TypeError):
-            r5 = Rectangle(1, 1, 'yet another string')
-        with self.assertRaises(TypeError):
-            r5 = Rectangle(1, 3, 0, 'even one more string')
+        with self.assertRaises(TypeError) as x:
+            r = Rectangle("Hello", 2)
+        self.assertEqual("width must be an integer", str(x.exception))
+        with self.assertRaises(TypeError) as x:
+            r = Rectangle(2, "World")
+        self.assertEqual("height must be an integer", str(x.exception))
+        with self.assertRaises(TypeError) as x:
+            r = Rectangle(1, 2, "Foo", 3)
+        self.assertEqual("x must be an integer", str(x.exception))
+        with self.assertRaises(TypeError) as x:
+            r = Rectangle(1, 2, 2, "Bar")
+        self.assertEqual("y must be an integer", str(x.exception))
+        with self.assertRaises(ValueError) as x:
+            r = Rectangle(0, 2)
+        self.assertEqual("width must be > 0", str(x.exception))
+        with self.assertRaises(ValueError) as x:
+            r = Rectangle(2, 0)
+        self.assertEqual("height must be > 0", str(x.exception))
+        with self.assertRaises(ValueError) as x:
+            r = Rectangle(2, -3)
+        self.assertEqual("height must be > 0", str(x.exception))
+        with self.assertRaises(ValueError) as x:
+            r = Rectangle(2, 5, -5, 6)
+        self.assertEqual("x must be >= 0", str(x.exception))
+        with self.assertRaises(ValueError) as x:
+            r = Rectangle(2, 8, 9, -65)
+        self.assertEqual("y must be >= 0", str(x.exception))
 
-        # check others
-        r5 = Rectangle(1, 3, 4, 5)
-        with self.assertRaises(TypeError):
-            r5.width = [1, 2, 3, 4, 5]
-        with self.assertRaises(TypeError):
-            r5.height = (321, 13)
-        with self.assertRaises(TypeError):
-            r5.x = {'1': 2, '2': 3, '3': 4}
-        with self.assertRaises(TypeError):
-            r5.y = 13212.4
+    def test_4_0(self):
+        """Test for public method area with normal types."""
 
-        # --------------------> ValueErrors <-------------------
-        with self.assertRaises(ValueError):  # width must be > 0
-            r6 = Rectangle(0, 1)
-        with self.assertRaises(ValueError):  # height must be > 0
-            r6 = Rectangle(5, 0)
-        with self.assertRaises(ValueError):  # x must be >= 0
-            r6 = Rectangle(5, 1, -1)
-        with self.assertRaises(ValueError):  # y must be >= 0
-            r6 = Rectangle(5, 1, 0, -1)
-        # ckeck others
-        r6 = Rectangle(1, 3)
-        with self.assertRaises(ValueError):  # width must be > 0
-            r6.width = 0
-        with self.assertRaises(ValueError):  # width must be > 0
-            r6.width = -1
-        with self.assertRaises(ValueError):  # height must be > 0
-            r6.height = 0
-        with self.assertRaises(ValueError):  # height must be > 0
-            r6.height = -132
-        with self.assertRaises(ValueError):  # x must be >= 0
-            r6.x = -1
-        with self.assertRaises(ValueError):  # y must be >= 0
-            r6.y = -123
+        r1 = Rectangle(3, 2)
+        self.assertEqual(r1.area(), 6)
+        r2 = Rectangle(75, 2)
+        self.assertEqual(r2.area(), 150)
+        r3 = Rectangle(8, 7, 0, 0, 12)
+        self.assertEqual(r3.area(), 56)
 
-    def test_area(self):         # Task 4:
-        r7 = Rectangle(10, 2, 1, 1, 32)
-        self.assertEqual(r7.area(), 20)
-        r8 = Rectangle(2, 4, 1, 1, 32)
-        self.assertEqual(r8.area(), 8)
-        r8.width = 1
-        self.assertEqual(r8.area(), 4)
-        r8.width = 2
-        r8.height = 3
-        self.assertEqual(r8.area(), 6)
+    def test_4_1(self):
+        """Test for public method area with wrong args."""
 
-        # Calling `area()` method with args should raise exception.
-        with self.assertRaises(TypeError):
-            r8.area(2)
-        with self.assertRaises(TypeError):
-            r8.area(2, 3, 4)
+        with self.assertRaises(TypeError) as x:
+            r1 = Rectangle(3, 2)
+            r1.area("Hello")
+        self.assertEqual(
+            "area() takes 1 positional argument but 2 were given", str(
+                x.exception))
 
-    def test_display(self):      # Task 5:
-        # calling `dispay()` method with args should raise exception.
-        r9 = Rectangle(4, 5, 0, 0, 12)
-        with self.assertRaises(TypeError):
-            r9.display(1)
-        with self.assertRaises(TypeError):
-            r9.display(1, 3, 6)
+    def test_5_0(self):
+        """Test for public method display."""
 
-        # if height, width, x or y is a very large integer memory error is
-        # raised.
-        with self.assertRaises(OverflowError):
-            r9.width = 10000000000000000000  # Exactly 20 digits
-            r9.display()
-        with self.assertRaises(MemoryError):
-            r9.width = 10000000000  # Exactly 11 digits
-            r9.display()
-        r9.width = 4  # re-assign 4 back to `width` for other tests
+        f = io.StringIO()
+        r1 = Rectangle(4, 5)
+        with contextlib.redirect_stdout(f):
+            r1.display()
+        s = f.getvalue()
+        res = "####\n####\n####\n####\n####\n"
+        self.assertEqual(s, res)
 
-        with self.assertRaises(OverflowError):
-            r9.x = 10000000000000000000
-            r9.display()
-        with self.assertRaises(MemoryError):
-            r9.x = 10000000000
-            r9.display()
-        r9.x = 0  # re-assign 0 back to `x` for other tests
+    def test_5_1(self):
+        """Test for public method display with wrong args."""
 
-        with self.assertRaises(OverflowError):
-            r9.y = 10000000000000000000
-            r9.display()
-        with self.assertRaises(MemoryError):
-            r9.y = 10000000000
-            r9.display()
-        r9.y = 0  # re-assign 0 back to `y` for other tests
+        with self.assertRaises(TypeError) as x:
+            r1 = Rectangle(9, 6)
+            r1.display(9)
+        self.assertEqual(
+            "display() takes 1 positional argument but 2 were given", str(
+                x.exception))
 
-    # Skipped Task 6(`__str__()` method)
-    # Skipped Task 7(update `display()` method)
+    def test_6_0(self):
+        """Test for __str__ representation."""
 
-    def test_update_1(self):   # Task 8: create
-        r10 = Rectangle(1, 1, 0, 0, 100)
-        args = (12, 10, 5, 1, 1)
+        f = io.StringIO()
+        r1 = Rectangle(4, 6, 2, 1, 12)
+        with contextlib.redirect_stdout(f):
+            print(r1)
+        s = f.getvalue()
+        res = "[Rectangle] (12) 2/1 - 4/6\n"
+        self.assertEqual(s, res)
 
-        # try passing complete args
-        r10.update(*args)
-        self.assertEqual(r10.id, 12)
-        self.assertEqual(r10.width, 10)
-        self.assertEqual(r10.height, 5)
-        self.assertEqual(r10.x, 1)
-        self.assertEqual(r10.y, 1)
+    def test_7_0(self):
+        """Test for public method display with x and y."""
 
-        # try passing empty *args
-        r11 = Rectangle(1, 1, 0, 0, 101)
-        args = ()
-        r11.update(*args)
-        self.assertEqual(r11.id, 101)
-        self.assertEqual(r11.width, 1)
-        self.assertEqual(r11.height, 1)
-        self.assertEqual(r11.x, 0)
-        self.assertEqual(r11.y, 0)
+        f = io.StringIO()
+        r1 = Rectangle(2, 3, 2, 2)
+        with contextlib.redirect_stdout(f):
+            r1.display()
+        s = f.getvalue()
+        res = "\n\n  ##\n  ##\n  ##\n"
+        self.assertEqual(s, res)
 
-        # try passing some *args
-        r11 = Rectangle(1, 1, 0, 0, 101)
-        args = (1, 2, 3)
-        r11.update(*args)
-        self.assertEqual(r11.id, 1)
-        self.assertEqual(r11.width, 2)
-        self.assertEqual(r11.height, 3)
-        self.assertEqual(r11.x, 0)
-        self.assertEqual(r11.y, 0)
+    def test_8_0(self):
+        """Test for public method update."""
 
-        # When args contains too much arguments (greater than 5), only
-        # values of index zero to four are used
-        args = (12, 10, 5, 1, 1, 21, 23, 43)
-        r11.update(*args)
-        self.assertEqual(r11.id, 12)
-        self.assertEqual(r11.width, 10)
-        self.assertEqual(r11.height, 5)
-        self.assertEqual(r11.x, 1)
-        self.assertEqual(r11.y, 1)
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89)
+        self.assertEqual(r1.id, 89)
+        r1.update(89, 2)
+        self.assertEqual(r1.width, 2)
+        r1.update(89, 2, 3)
+        self.assertEqual(r1.height, 3)
+        r1.update(89, 2, 3, 4)
+        self.assertEqual(r1.x, 4)
+        r1.update(89, 2, 3, 4, 5)
+        self.assertEqual(r1.y, 5)
+        r1.update()
+        self.assertEqual(str(r1), "[Rectangle] (89) 4/5 - 2/3")
 
-    def test_update_2(self):   # Task 9: Update
-        pass
+    def test_8_1(self):
+        """Test for public method update with wrong types."""
+
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(TypeError) as x:
+            r1.update("hi")
+        self.assertEqual("id must be an integer", str(x.exception))
+        with self.assertRaises(TypeError) as x:
+            r1.update(65, 89, "hi")
+        self.assertEqual("height must be an integer", str(x.exception))
+
+    def test_9_0(self):
+        """Test for public method update with kwargs."""
+
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(height=1)
+        self.assertEqual(r1.height, 1)
+        r1.update(x=1, height=2, y=3, width=4)
+        self.assertEqual(r1.y, 3)
+        self.assertEqual(r1.width, 4)
+        self.assertEqual(r1.x, 1)
+        self.assertEqual(r1.height, 2)
+
+    def test_9_1(self):
+        """Test for public method update with wrong types in kwargs."""
+
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(TypeError) as x:
+            r1.update(id='hi')
+        self.assertEqual("id must be an integer", str(x.exception))
+        with self.assertRaises(TypeError) as x:
+            r1.update(height=65, x=2, width="hi")
+        self.assertEqual("width must be an integer", str(x.exception))
+
+    def test_13_0(self):
+        """Test for public method to_dictionary."""
+
+        r1 = Rectangle(10, 2, 1, 9)
+        r1_dictionary = r1.to_dictionary()
+        r_dictionary = {'x': 1, 'y': 9, 'id': 1, 'height': 2, 'width': 10}
+        self.assertEqual(len(r1_dictionary), len(r_dictionary))
+        self.assertEqual(type(r1_dictionary), dict)
+        r2 = Rectangle(1, 1)
+        r2.update(**r1_dictionary)
+        r2_dictionary = r2.to_dictionary()
+        self.assertEqual(len(r1_dictionary), len(r2_dictionary))
+        self.assertEqual(type(r2_dictionary), dict)
+        self.assertFalse(r1 == r2)
+
+    def test_13_1(self):
+        """Test for public method to_dictionary with wrong args."""
+
+        s = "to_dictionary() takes 1 positional argument but 2 were given"
+        with self.assertRaises(TypeError) as x:
+            r1 = Rectangle(10, 2, 1, 9)
+            r1_dictionary = r1.to_dictionary("Hi")
+        self.assertEqual(s, str(x.exception))
+
+
+if __name__ == '__main__':
+    unittest.main()
