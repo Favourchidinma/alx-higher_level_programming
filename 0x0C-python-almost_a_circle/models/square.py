@@ -12,12 +12,6 @@ class Square(Rectangle):
         """
         super().__init__(size, size, x, y, id)
 
-    def __str__(self):
-        """Returns a formated string.
-        """
-        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y,
-                                                 self.width)
-
     @property
     def size(self):
         """A getter and setter method that for size."""
