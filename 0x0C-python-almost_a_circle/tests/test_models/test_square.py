@@ -7,4 +7,6 @@ from models.square import Square
 class TestSquare(unittest.TestCase):
     """Test rectangle clas.
     """
-    pass
+    def test_square(self):
+        """Test square"""
+        pass
