@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-""" A module `base` that contains a class `Base` to be used as the base class
-for future implementation of other classes.
+"""A module `base` that contains a class `Base` to be used as the base class
+for future implementation of other classes. 
 """
 import json
 
@@ -10,8 +10,8 @@ class Base:
     """
     __nb_objects = 0
 
-    def __init__(self, id=None):
-        """Imitializes the class `Base` with `id`.
+    def __init__(self, id=None):  # Task 1
+        """Initializes the class `Base` with `id`.
 
         Args:
             id(int): the id.
@@ -33,7 +33,8 @@ class Base:
 
     @classmethod
     def save_to_file(cls, list_objs):   # Task 16
-        """A method that writes the JSON string representation of `list_objs`
+        """
+        A method that writes the JSON string representation of `list_objs`
         to a file.
         """
         new_list = []
@@ -57,7 +58,7 @@ class Base:
         It converts json string to python object.
 
         Args:
-            json_string(str): is a string representing a list of dictionaries
+           json_string(str): is a string representing a list of dictionaries
         """
         if json_string is None or len(json_string) == 0:
             return json.loads('[]')
@@ -65,7 +66,8 @@ class Base:
 
     @classmethod
     def create(cls, **dictionary):
-        """A method that returns an instance with all attributes already set.
+        """
+        A method that returns an instance with all attributes already set.
         """
         temp_rect = cls(1, 1)  # dummy values
         temp_rect.update(**dictionary)

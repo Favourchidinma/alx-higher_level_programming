@@ -114,14 +114,14 @@ class Rectangle(Base):
                 self.__width = args[1]
                 self.__height = args[2]
                 self.__x = args[3]
-            elif len(args) == 5:
+            elif len(args) >= 5:
                 self.id = args[0]
                 self.__width = args[1]
                 self.__height = args[2]
                 self.__x = args[3]
                 self.__y = args[4]
-            elif len(args) > 5:
-                pass  # TODO: raise something/do something
+            elif len(args) > 5: # redundant
+                pass
 
         elif kwargs and len(kwargs) != 0:   # Case 2: args is empty
             lst = ['id', 'width', 'height', 'x', 'y']

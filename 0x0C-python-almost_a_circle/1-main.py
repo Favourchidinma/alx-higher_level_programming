@@ -10,8 +10,8 @@ if __name__ == "__main__":
     r2 = Rectangle(2, 10)
     print(r2.id)
 
-    r3 = Rectangle(10, 2, 0, 0, 12)
-    print(r3.id)
+    r3 = Rectangle(1, 2, 0, 0, 12)
+    print('id =', r3.id, 'width =', r3.width)
 
     r4 = Rectangle(123, 4)
     print(r4.id)
