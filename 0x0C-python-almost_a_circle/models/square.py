@@ -15,11 +15,12 @@ class Square(Rectangle):
     @property
     def size(self):
         """A getter and setter method that for size."""
-        return self.width
+        return self.__width
 
     @size.setter
     def size(self, size):
-        super().__init__(size, size)
+        self.__width = size
+        self.__height = size
 
     def update(self, *args, **kwargs):
         """A method that assigns values to object attributes.
